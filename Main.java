@@ -10,20 +10,48 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
+
+    public static Entry_Structure search_word(String word, ArrayList<Entry_Structure> words_list) {
+
+        Stream<Entry_Structure> result = words_list.stream().filter(w -> word.equals(w.getWord()));
+
+        ArrayList<Entry_Structure> rl_result = result.collect(Collectors.toCollection(ArrayList::new));
+
+        return rl_result.get(0);
+    }
+
     public static void main(String[] args) {
-         ArrayList<Entry_Structure> words_list = new ArrayList<Entry_Structure>();
+        ArrayList<Entry_Structure> words_list = new ArrayList<Entry_Structure>();
 
         Scanner myScanner = new Scanner(System.in);
         String user_input = myScanner.nextLine();
 
-        System.out.println(user_input);
+        String[] user_input_words = user_input.split(" ");
+        
+        ArrayList<String> necessary_words = new ArrayList<String>();
+        ArrayList<String> or_words = new ArrayList<String>();
+        ArrayList<String> not_words = new ArrayList<String>();
+
+        for (String word : user_input_words) {
+            if (word.startsWith("+")) {
+                word = word.replace('+', ' ');
+                word = word.trim();
+                or_words.add(word);
+            } else if (word.startsWith("-")) {
+                word = word.replace('-', ' ');
+                word = word.trim();
+                not_words.add(word);
+            } else {
+                necessary_words.add(word);
+            }
+        }
         myScanner.close();
 
         ArrayList<String> file_names_in_folder = FileReader.getFileNames("./EnglishData/");
 
         for (String path : file_names_in_folder) {
             try {
-                File file = new File("./EnglishData/"+path);
+                File file = new File("./EnglishData/" + path);
                 Scanner myReader = new Scanner(file);
 
                 while (myReader.hasNextLine()) {
@@ -43,7 +71,7 @@ public class Main {
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
-            } 
+            }
         }
 
         Collections.sort(words_list, Comparator.comparing(Entry_Structure::getWord));
@@ -69,17 +97,12 @@ public class Main {
                 mergedList.add(entry);
             }
         }
-        
-        Stream<Entry_Structure> result = mergedList.stream().filter(w->user_input.equals(w.getWord()));
-        
-        ArrayList<Entry_Structure> rl_result = result.collect(Collectors.toCollection(ArrayList::new));
 
-        for (Entry_Structure entry_Structure : rl_result) {
-            System.out.print(entry_Structure.getWord() + " : " + entry_Structure.getCount() + " : ");
-            for(int file_number : entry_Structure.getFile_names()){
-                System.out.print(file_number + ", ");
-            }
-            System.out.println();
+        Entry_Structure result = search_word(user_input, words_list);
+
+        System.out.print(result.getWord() + " : " + result.getCount() + " : ");
+        for (int file_number : result.getFile_names()) {
+            System.out.print(file_number + ", ");
         }
     }
 }
