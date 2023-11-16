@@ -27,7 +27,7 @@ public class Main {
         String user_input = myScanner.nextLine();
 
         String[] user_input_words = user_input.split(" ");
-        
+
         ArrayList<String> necessary_words = new ArrayList<String>();
         ArrayList<String> or_words = new ArrayList<String>();
         ArrayList<String> not_words = new ArrayList<String>();
@@ -48,6 +48,8 @@ public class Main {
         myScanner.close();
 
         ArrayList<String> file_names_in_folder = FileReader.getFileNames("./EnglishData/");
+
+        int counter = 0;
 
         for (String path : file_names_in_folder) {
             try {
@@ -72,6 +74,12 @@ public class Main {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
+
+            if(counter > 5)
+            {
+                break;
+            }
+            counter++;
         }
 
         Collections.sort(words_list, Comparator.comparing(Entry_Structure::getWord));
@@ -98,11 +106,32 @@ public class Main {
             }
         }
 
-        Entry_Structure result = search_word(user_input, words_list);
+        Set<Integer> necessary_files = new HashSet<Integer>();
+        Set<Integer> forbidden_files = new HashSet<Integer>();
+        Set<Integer> optional_files = new HashSet<Integer>();
 
-        System.out.print(result.getWord() + " : " + result.getCount() + " : ");
-        for (int file_number : result.getFile_names()) {
-            System.out.print(file_number + ", ");
+        for (String n_word : necessary_words) {
+            Entry_Structure result = search_word(n_word, words_list);
+            necessary_files.addAll(result.getFile_names());
+        }
+
+        for (String or_word : or_words) {
+            Entry_Structure result = search_word(or_word, words_list);
+            optional_files.addAll(result.getFile_names());
+        }
+
+        for (String not_word : not_words) {
+            Entry_Structure result = search_word(not_word, words_list);
+            forbidden_files.addAll(result.getFile_names());
+        }
+        
+        Set<Integer> intersection = new HashSet<>(necessary_files);
+        intersection.retainAll(optional_files);
+
+        intersection.removeAll(forbidden_files);
+
+        for (Integer entry : intersection) {
+            System.out.println(entry);
         }
     }
 }
