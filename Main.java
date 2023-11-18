@@ -3,21 +3,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Map;
 
 public class Main {
 
-    public static Entry_Structure search_word(String word, ArrayList<Entry_Structure> words_list) {
-
-        Stream<Entry_Structure> result = words_list.stream().filter(w -> word.equals(w.getWord()));
-
-        ArrayList<Entry_Structure> rl_result = result.collect(Collectors.toCollection(ArrayList::new));
-
-        return rl_result.get(0);
+    public static Set<Integer> search_word(String word, Map<String, Set<Integer>> invertedIndex) {
+        return invertedIndex.getOrDefault(word, Collections.emptySet());
     }
 
     public static void main(String[] args) {
@@ -49,8 +44,6 @@ public class Main {
 
         ArrayList<String> file_names_in_folder = FileReader.getFileNames("./EnglishData/");
 
-        int counter = 0;
-
         for (String path : file_names_in_folder) {
             try {
                 File file = new File("./EnglishData/" + path);
@@ -64,7 +57,10 @@ public class Main {
                     fileName.add(Integer.parseInt(path));
 
                     for (String word : splitted_data) {
-                        Entry_Structure newEntry = new Entry_Structure(word, 1, fileName);
+                        if (word == "") {
+                            continue;
+                        }
+                        Entry_Structure newEntry = new Entry_Structure(word, fileName);
                         words_list.add(newEntry);
                     }
                 }
@@ -74,36 +70,17 @@ public class Main {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
-
-            if(counter > 5)
-            {
-                break;
-            }
-            counter++;
         }
 
         Collections.sort(words_list, Comparator.comparing(Entry_Structure::getWord));
 
-        ArrayList<Entry_Structure> mergedList = new ArrayList<>();
+        Map<String, Set<Integer>> invertedIndex = new HashMap<>();
 
         for (Entry_Structure entry : words_list) {
-            boolean found = false;
+            String word = entry.getWord();
+            Set<Integer> documentIds = entry.getFile_names();
 
-            for (Entry_Structure mergedEntry : mergedList) {
-                if (mergedEntry.getWord().equals(entry.getWord())) {
-                    int new_count = mergedEntry.getCount() + 1;
-                    mergedEntry.setCount(new_count);
-
-                    Set<Integer> new_file_names = entry.getFile_names();
-                    new_file_names.addAll(mergedEntry.getFile_names());
-                    mergedEntry.setFile_names(new_file_names);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                mergedList.add(entry);
-            }
+            invertedIndex.computeIfAbsent(word, k -> new HashSet<>()).addAll(documentIds);
         }
 
         Set<Integer> necessary_files = new HashSet<Integer>();
@@ -111,22 +88,22 @@ public class Main {
         Set<Integer> optional_files = new HashSet<Integer>();
 
         for (String n_word : necessary_words) {
-            Entry_Structure result = search_word(n_word, words_list);
-            necessary_files.addAll(result.getFile_names());
+            Set<Integer> result = search_word(n_word, invertedIndex);
+            necessary_files.addAll(result);
         }
 
         for (String or_word : or_words) {
-            Entry_Structure result = search_word(or_word, words_list);
-            optional_files.addAll(result.getFile_names());
+            Set<Integer> result = search_word(or_word, invertedIndex);
+            optional_files.addAll(result);
         }
 
         for (String not_word : not_words) {
-            Entry_Structure result = search_word(not_word, words_list);
-            forbidden_files.addAll(result.getFile_names());
+            Set<Integer> result = search_word(not_word, invertedIndex);
+            forbidden_files.addAll(result);
         }
-        
+
         Set<Integer> intersection = new HashSet<>(necessary_files);
-        intersection.retainAll(optional_files);
+        intersection.addAll(optional_files);
 
         intersection.removeAll(forbidden_files);
 
