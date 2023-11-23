@@ -1,0 +1,17 @@
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\bin\Debug\net7.0\StudentsTopScores.exe
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\bin\Debug\net7.0\StudentsTopScores.deps.json
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\bin\Debug\net7.0\StudentsTopScores.runtimeconfig.json
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\bin\Debug\net7.0\StudentsTopScores.dll
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\bin\Debug\net7.0\StudentsTopScores.pdb
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.csproj.AssemblyReference.cache
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.AssemblyInfoInputs.cache
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.AssemblyInfo.cs
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.csproj.CoreCompileInputs.cache
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.csproj.CopyComplete
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.dll
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\refint\StudentsTopScores.dll
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.pdb
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\StudentsTopScores.genruntimeconfig.cache
+C:\Users\mhda1\Documents\VSCode\Mohaymen\Fall1402-TwoWeek-InternShip-Backend\phase03-C#\StudentsTopScores\obj\Debug\net7.0\ref\StudentsTopScores.dll

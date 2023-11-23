@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "CzzpC686M6tyjbjHwXZ/jkjd1eaGn3tcA3NptYnq9s2NL0YpGTZsDRBAl/hk89ChmnApa5Ul6Uhs8fymrCqlQA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mhda1\\Documents\\VSCode\\Mohaymen\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\StudentsTopScores.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mhda1\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
