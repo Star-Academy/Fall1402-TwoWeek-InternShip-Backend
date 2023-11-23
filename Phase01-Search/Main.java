@@ -11,7 +11,7 @@ import java.util.Map;
 public class Main {
 
     // Searchs a word in inverted index then returns name of files that are containing that word
-    public static Set<String> search_word(String word, Map<String, Set<String>> invertedIndex) {
+    public static Set<String> searchWord(String word, Map<String, Set<String>> invertedIndex) {
         return invertedIndex.getOrDefault(word, Collections.emptySet());
     }
 
@@ -89,21 +89,21 @@ public class Main {
         // Finding intersection between necessary words' file names
         for (String nWord : necessaryWords) {
             if(necessaryFiles.isEmpty()){
-                necessaryFiles.addAll(search_word(nWord, invertedIndex));
+                necessaryFiles.addAll(searchWord(nWord, invertedIndex));
             }
             else{
-                necessaryFiles.retainAll(search_word(nWord, invertedIndex));
+                necessaryFiles.retainAll(searchWord(nWord, invertedIndex));
             }
         }
 
         // Finding all orWords' file names
         for (String orWord : orWords) {
-            orFiles.addAll(search_word(orWord, invertedIndex));
+            orFiles.addAll(searchWord(orWord, invertedIndex));
         }
 
         // Finding all forbidden words' file names
         for (String notWord : notWords) {
-            forbiddenFiles.addAll(search_word(notWord, invertedIndex));
+            forbiddenFiles.addAll(searchWord(notWord, invertedIndex));
         }
 
         // Final answer is intersection between necessary files and orFiles - forbidden files
