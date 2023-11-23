@@ -3,7 +3,6 @@ package com.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -11,11 +10,6 @@ import java.util.Set;
 import java.util.Map;
 
 public class Main {
-
-    // Searchs a word in inverted index then returns name of files that are containing that word
-    public static Set<String> searchWord(String word, Map<String, Set<String>> invertedIndex) {
-        return invertedIndex.getOrDefault(word, Collections.emptySet());
-    }
 
     public static void main(String[] args) {
         
@@ -27,6 +21,8 @@ public class Main {
 
         System.out.print("Enter Search Query: ");
         final String userInput = myScanner.nextLine();
+        
+        myScanner.close();
         
         // Finding name of all files that are in EnglishData directory
         ArrayList<String> fileNamesInFolder = FileReader.getFileNames(directoryPath);
@@ -62,51 +58,15 @@ public class Main {
             }
         }
         
-        // Splitting user input to undrestand the command
-        String[] userInputWords = userInput.split(" ");
+        // Categorizing command words into or_words, necessary and forbidden groups
+        ArrayList<String> necessaryWords = WordCategorizer.categorizer(userInput, "");
+        ArrayList<String> orWords = WordCategorizer.categorizer(userInput, "+");
+        ArrayList<String> notWords = WordCategorizer.categorizer(userInput, "-");
         
-        ArrayList<String> necessaryWords = new ArrayList<String>();
-        ArrayList<String> orWords = new ArrayList<String>();
-        ArrayList<String> notWords = new ArrayList<String>();
-        
-        // Categorizing command words into orWords, necessary and forbidden groups
-        for (String word : userInputWords) {
-            if (word.startsWith("+")) {
-                word = word.replace('+', ' ').trim();
-                orWords.add(word);
-            } else if (word.startsWith("-")) {
-                word = word.replace('-', ' ').trim();
-                notWords.add(word);
-            } else {
-                necessaryWords.add(word);
-            }
-        }
-        myScanner.close();
-
         // Initializing some sets for forming final answer
-        Set<String> necessaryFiles = new HashSet<String>();
-        Set<String> forbiddenFiles = new HashSet<String>();
-        Set<String> orFiles = new HashSet<String>();
-
-        // Finding intersection between necessary words' file names
-        for (String nWord : necessaryWords) {
-            if(necessaryFiles.isEmpty()){
-                necessaryFiles.addAll(searchWord(nWord, invertedIndex));
-            }
-            else{
-                necessaryFiles.retainAll(searchWord(nWord, invertedIndex));
-            }
-        }
-
-        // Finding all orWords' file names
-        for (String orWord : orWords) {
-            orFiles.addAll(searchWord(orWord, invertedIndex));
-        }
-
-        // Finding all forbidden words' file names
-        for (String notWord : notWords) {
-            forbiddenFiles.addAll(searchWord(notWord, invertedIndex));
-        }
+        Set<String> necessaryFiles = FileNameCategorizer.categorizer(invertedIndex, necessaryWords, true);
+        Set<String> orFiles = FileNameCategorizer.categorizer(invertedIndex, orWords, false);
+        Set<String> forbiddenFiles = FileNameCategorizer.categorizer(invertedIndex, notWords, false);
 
         // Final answer is intersection between necessary files and orFiles - forbidden files
         Set<String> intersection = new HashSet<>(necessaryFiles);
