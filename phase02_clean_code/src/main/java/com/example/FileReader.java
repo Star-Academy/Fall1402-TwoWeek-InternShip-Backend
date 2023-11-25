@@ -4,7 +4,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 
 public class FileReader {
-    public static ArrayList<String> getFileNames(String path){
+    public ArrayList<String> getFileNames(String path){
         ArrayList<String> fileNames = new ArrayList<String>();
         Path folder = Paths.get(path);
         

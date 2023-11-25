@@ -14,17 +14,21 @@ public class SearchResults {
     }
 
     public Set<String> getSearchResult(){
-        // Categorizing command words into or_words, necessary and forbidden groups
-        ArrayList<String> necessaryWords = WordCategorizer.categorizer(searchQuery, "");
-        ArrayList<String> orWords = WordCategorizer.categorizer(searchQuery, "+");
-        ArrayList<String> notWords = WordCategorizer.categorizer(searchQuery, "-");
+        // Splitting user input to undrestand the command
+        String[] splittedSearchQuery = searchQuery.split(" ");
 
-        // Initializing our categorizers
+        // Categorizing command words into or_words, necessary and forbidden groups
+        WordCategorizer wordCategorizer = new WordCategorizer();
+        ArrayList<String> necessaryWords = wordCategorizer.categorizer(splittedSearchQuery, "");
+        ArrayList<String> orWords = wordCategorizer.categorizer(splittedSearchQuery, "+");
+        ArrayList<String> notWords = wordCategorizer.categorizer(splittedSearchQuery, "-");
+
+        // Initializing necessary file name categorizer and applying it on invertedIndex
         NecessaryFileNameCategorizer necessaryFileNameCategorizer = new NecessaryFileNameCategorizer();
-        UnnecessaryFileNameCategorizer unnecessaryFileNameCategorizer = new UnnecessaryFileNameCategorizer();
-        
-        // Initializing some sets for forming final answer
         Set<String> necessaryFiles = necessaryFileNameCategorizer.categorizer(invertedIndex, necessaryWords);
+        
+        // Initializing unnecessary file name categorizer and applying it on invertedIndex
+        UnnecessaryFileNameCategorizer unnecessaryFileNameCategorizer = new UnnecessaryFileNameCategorizer();
         Set<String> orFiles = unnecessaryFileNameCategorizer.categorizer(invertedIndex, orWords);
         Set<String> forbiddenFiles = unnecessaryFileNameCategorizer.categorizer(invertedIndex, notWords);
 

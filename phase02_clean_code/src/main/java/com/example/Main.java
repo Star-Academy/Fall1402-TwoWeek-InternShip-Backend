@@ -11,7 +11,8 @@ public class Main {
         final String directoryPath = userInput.getInput("Enter Data Folder Path: ");
         
         // Finding name of all files that are in EnglishData directory
-        ArrayList<String> fileNamesInFolder = FileReader.getFileNames(directoryPath);
+        FileReader fileReader = new FileReader();
+        ArrayList<String> fileNamesInFolder = fileReader.getFileNames(directoryPath);
         
         // Constructing inverted index
         InvertedIndex invertedIndex = new InvertedIndex();
@@ -25,10 +26,8 @@ public class Main {
         SearchResults result = new SearchResults(invertedIndex, searchQuery);
         Set<String> searchResults = result.getSearchResult();
 
-        //Printing the result
-        System.out.println("Results: ");
-        for (String entry : searchResults) {
-            System.out.println(entry);
-        }
+        //Printing the results
+        SearchResultPrinter searchResultPrinter = new SearchResultPrinter();
+        searchResultPrinter.printResults(searchResults);
     }
 }
