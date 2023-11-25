@@ -60,19 +60,21 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mhda1\\Documents\\VSCode\\Mohaymen\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\StudentsTopScores.csproj",
+      "projectUniqueName": "C:\\Users\\mhda1\\Documents\\VSCode\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\StudentsTopScores.csproj",
       "projectName": "StudentsTopScores",
-      "projectPath": "C:\\Users\\mhda1\\Documents\\VSCode\\Mohaymen\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\StudentsTopScores.csproj",
+      "projectPath": "C:\\Users\\mhda1\\Documents\\VSCode\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\StudentsTopScores.csproj",
       "packagesPath": "C:\\Users\\mhda1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mhda1\\Documents\\VSCode\\Mohaymen\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\obj\\",
+      "outputPath": "C:\\Users\\mhda1\\Documents\\VSCode\\Fall1402-TwoWeek-InternShip-Backend\\phase03-C#\\StudentsTopScores\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mhda1\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\mhda1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -112,7 +114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
