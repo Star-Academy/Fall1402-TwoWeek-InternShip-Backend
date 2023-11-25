@@ -3,14 +3,16 @@ package com.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import lombok.Getter;
+
 public class InvertedIndex {
+    @Getter
     private Map<String, Set<String>> invertedIndex;
 
     InvertedIndex(){
@@ -45,9 +47,5 @@ public class InvertedIndex {
                 e.printStackTrace();
             }
         }
-    }
-
-    public Set<String> searchWord(String word) {
-        return invertedIndex.getOrDefault(word, Collections.emptySet());
     }
 }

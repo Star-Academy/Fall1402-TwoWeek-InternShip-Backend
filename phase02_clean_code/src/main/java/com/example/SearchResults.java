@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SearchResults {
+public class SearchResults{
     private InvertedIndex invertedIndex;
     String searchQuery;
 
@@ -18,10 +18,12 @@ public class SearchResults {
         String[] splittedSearchQuery = searchQuery.split(" ");
 
         // Categorizing command words into or_words, necessary and forbidden groups
-        WordCategorizer wordCategorizer = new WordCategorizer();
-        ArrayList<String> necessaryWords = wordCategorizer.categorizer(splittedSearchQuery, "");
-        ArrayList<String> orWords = wordCategorizer.categorizer(splittedSearchQuery, "+");
-        ArrayList<String> notWords = wordCategorizer.categorizer(splittedSearchQuery, "-");
+        NecessaryWordCategorizer necessaryWordCategorizer = new NecessaryWordCategorizer();
+        ArrayList<String> necessaryWords = necessaryWordCategorizer.categorizer(splittedSearchQuery);
+        
+        UnnecessaryWordCategorizer unnecessaryWordCategorizer = new UnnecessaryWordCategorizer();
+        ArrayList<String> orWords = unnecessaryWordCategorizer.categorizer(splittedSearchQuery, "+");
+        ArrayList<String> notWords = unnecessaryWordCategorizer.categorizer(splittedSearchQuery, "-");
 
         // Initializing necessary file name categorizer and applying it on invertedIndex
         NecessaryFileNameCategorizer necessaryFileNameCategorizer = new NecessaryFileNameCategorizer();
