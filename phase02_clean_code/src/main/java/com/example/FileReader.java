@@ -8,19 +8,15 @@ public class FileReader {
         ArrayList<String> fileNames = new ArrayList<String>();
         Path folder = Paths.get(path);
         
-        if (Files.isDirectory(folder)) {
-            try {  
-                DirectoryStream<Path> directoryStream = Files.newDirectoryStream(folder);
-                for (Path filePath : directoryStream) {
-                    
-                    fileNames.add(String.valueOf(filePath.getFileName()));
-                }
-                directoryStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {  
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(folder);
+            for (Path filePath : directoryStream) {
+                
+                fileNames.add(String.valueOf(filePath.getFileName()));
             }
-        } else {
-            System.out.println("Specified path is not a directory.");
+            directoryStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return fileNames;
