@@ -1,7 +1,5 @@
 package com.example;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 public class SearchResults{
@@ -17,28 +15,17 @@ public class SearchResults{
         // Splitting user input to undrestand the command
         String[] splittedSearchQuery = searchQuery.split(" ");
 
-        // Categorizing command words into or_words, necessary and forbidden groups
-        NecessaryWordCategorizer necessaryWordCategorizer = new NecessaryWordCategorizer();
-        ArrayList<String> necessaryWords = necessaryWordCategorizer.categorizer(splittedSearchQuery);
-        
-        UnnecessaryWordCategorizer unnecessaryWordCategorizer = new UnnecessaryWordCategorizer();
-        ArrayList<String> orWords = unnecessaryWordCategorizer.categorizer(splittedSearchQuery, "+");
-        ArrayList<String> notWords = unnecessaryWordCategorizer.categorizer(splittedSearchQuery, "-");
+        NecessaryWordsSearchResult necessaryWordsSearchResult = new NecessaryWordsSearchResult();
+        OrWordsSearchResult orWordsSearchResult = new OrWordsSearchResult();
+        ForbiddenWordSearchResult forbiddenWordSearchResult = new ForbiddenWordSearchResult();
 
-        // Initializing necessary file name categorizer and applying it on invertedIndex
-        NecessaryFileNameCategorizer necessaryFileNameCategorizer = new NecessaryFileNameCategorizer();
-        Set<String> necessaryFiles = necessaryFileNameCategorizer.categorizer(invertedIndex, necessaryWords);
-        
-        // Initializing unnecessary file name categorizer and applying it on invertedIndex
-        UnnecessaryFileNameCategorizer unnecessaryFileNameCategorizer = new UnnecessaryFileNameCategorizer();
-        Set<String> orFiles = unnecessaryFileNameCategorizer.categorizer(invertedIndex, orWords);
-        Set<String> forbiddenFiles = unnecessaryFileNameCategorizer.categorizer(invertedIndex, notWords);
+        Set<String> necessaryFiles = necessaryWordsSearchResult.getNecessaryWordsSearchResult(splittedSearchQuery, invertedIndex);
+        Set<String> orFiles = orWordsSearchResult.getOrWordsSearchResult(splittedSearchQuery, invertedIndex);
+        Set<String> forbiddenFiles = forbiddenWordSearchResult.getForbiddenWordsSearchResult(splittedSearchQuery, invertedIndex);
 
-        // Final answer is intersection between necessary files and orFiles - forbidden files
-        Set<String> intersection = new HashSet<>(necessaryFiles);
-        intersection.retainAll(orFiles);
-        intersection.removeAll(forbiddenFiles);
+        FinalSearchResult finalSearchResult = new FinalSearchResult(necessaryFiles, orFiles, forbiddenFiles);
+        Set<String> finalResult = finalSearchResult.giveFinalResult();
 
-        return intersection;
+        return finalResult;
     }
 }
