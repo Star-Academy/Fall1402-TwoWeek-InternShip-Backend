@@ -14,10 +14,11 @@ namespace StudentsTopScores
 
             StudentsInformation students = new(studentsFilePath, scoresFilePath);
             List<Student> scoredStudents = students.ConstructStudentsInformation();
+
             TopStudents topStudents = new();
             List<Student> topNStudents = topStudents.FindtopStudetns(scoredStudents, topStudentsNum);
 
-            Printer.PrintTopStudents(topStudentsNum, topNStudents);
+            Printer.PrintTopStudents(topNStudents, topStudentsNum);
 
             Console.ReadKey();
         }

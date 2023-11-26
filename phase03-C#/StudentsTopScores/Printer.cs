@@ -4,7 +4,7 @@ namespace StudentsTopScores
 {
     class Printer
     {
-        public static void PrintTopStudents(int numberOfStudents, List<Student> students)
+        public static void PrintTopStudents(List<Student> students, int numberOfStudents)
         {
             int count = 1;
             foreach (var student in students)
