@@ -9,25 +9,7 @@ namespace StudentsTopScores
         public int StudentNumber { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
+        public float AverageScore;
         required public List<StudentScore> Scores { get; set; }
-
-        public float Average
-        {
-            get
-            {
-                float totalScore = 0;
-                if (this.Scores != null)
-                {
-                    foreach (var score in this.Scores)
-                    {
-                        totalScore += score.Score;
-                    }
-
-                    return totalScore / Scores.Count();
-                }
-
-                return totalScore;
-            }
-        }
     }
 }

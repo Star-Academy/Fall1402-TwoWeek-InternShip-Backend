@@ -8,31 +8,16 @@ namespace StudentsTopScores
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Enter students data file path: ");
-            string studentsFilePath = Console.ReadLine() ?? "";
-            Console.WriteLine("Enter scores data file path: ");
-            string scoresFilePath = Console.ReadLine() ?? "";
+            string studentsFilePath = UserInput.GetInput("Enter students data file path: ");
+            string scoresFilePath = UserInput.GetInput("Enter scores data file path: ");
+            int topStudentsNum = int.Parse(UserInput.GetInput("Enter number of top students to print: "));
 
-            if (File.Exists(studentsFilePath) && File.Exists(scoresFilePath))
-            {
-                string studentsJsonContext = File.ReadAllText(studentsFilePath);
-                string scoresJsonContext = File.ReadAllText(scoresFilePath);
-                
-                List<Student> students = FileReader<Student>.ReadFromFile(studentsFilePath);
-                List<StudentScore> scores = FileReader<StudentScore>.ReadFromFile(scoresFilePath);
+            StudentsInformation students = new(studentsFilePath, scoresFilePath);
+            List<Student> scoredStudents = students.ConstructStudentsInformation();
+            TopStudents topStudents = new();
+            List<Student> topNStudents = topStudents.FindtopStudetns(scoredStudents, topStudentsNum);
 
-                foreach (var student in students)
-                {
-                    student.Scores = new List<StudentScore>();
-                    student.Scores.AddRange(scores.FindAll(s => s.StudentNumber == student.StudentNumber).ToList());
-                }
-
-                Printer.PrintTopStudents(3, students);
-            }
-            else
-            {
-                Console.WriteLine("Files are missing");
-            }
+            Printer.PrintTopStudents(topStudentsNum, topNStudents);
 
             Console.ReadKey();
         }

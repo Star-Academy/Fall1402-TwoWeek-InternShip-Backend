@@ -7,12 +7,18 @@ namespace StudentsTopScores
     {
         public static List<T> ReadFromFile(string path)
         {
-            string studentsJsonContext = File.ReadAllText(path);
-
-            List<T> result = JsonConvert.DeserializeObject<List<T>>(studentsJsonContext)
+            try
+            {
+                string studentsJsonContext = File.ReadAllText(path);
+                List<T> result = JsonConvert.DeserializeObject<List<T>>(studentsJsonContext)
                 ?? new List<T>();
-
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());  
+                return new List<T>();
+            }
         }
     }
 }
