@@ -9,13 +9,13 @@ namespace StudentsTopScores
 {
     internal class StudentsInformation
     {
-        private readonly string studentsFilePath;
-        private readonly string scoresFilePath;
+        private readonly string StudentsFilePath;
+        private readonly string ScoresFilePath;
 
         public StudentsInformation(string studentsFilePath, string scoresFilePath)
         {
-            this.studentsFilePath = studentsFilePath;
-            this.scoresFilePath = scoresFilePath;
+            this.StudentsFilePath = studentsFilePath;
+            this.ScoresFilePath = scoresFilePath;
         }
 
         public List<Student> ConstructStudentsInformation()
@@ -24,8 +24,8 @@ namespace StudentsTopScores
 
             try
             {
-                List<Student> students = FileReader<Student>.ReadFromFile(studentsFilePath);
-                List<StudentScore> scores = FileReader<StudentScore>.ReadFromFile(scoresFilePath);
+                List<Student> students = FileReader<Student>.ReadFromFile(StudentsFilePath);
+                List<StudentScore> scores = FileReader<StudentScore>.ReadFromFile(ScoresFilePath);
 
                 foreach (var student in students)
                 {
