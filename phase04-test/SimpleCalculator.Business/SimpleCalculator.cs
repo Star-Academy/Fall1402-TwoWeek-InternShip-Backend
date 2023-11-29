@@ -4,17 +4,13 @@ using SimpleCalculator.Business.OperatorBusiness;
 
 namespace SimpleCalculator.Business
 {
-    public class Calculator
+    public class SimpleCalculator : ICalculator
     {
         private readonly IOperatorProvider _operatorProvider;
 
-        public Calculator(IOperatorProvider operatorProvider)
+        public SimpleCalculator(IOperatorProvider operatorProvider)
         {
-            _operatorProvider = operatorProvider;
-        }
-
-        public Calculator() : this(new OperatorProvider())
-        {
+            _operatorProvider = operatorProvider ?? throw new ArgumentNullException(nameof(operatorProvider));
         }
 
         public int Calculate(int first, int second, OperatorEnum operatorType)

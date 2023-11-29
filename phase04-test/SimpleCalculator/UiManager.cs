@@ -13,9 +13,9 @@ namespace SimpleCalculator.ConsoleApp
             {"/", OperatorEnum.division }
         };
 
-        private readonly Calculator _calculator;
+        private readonly Business.SimpleCalculator _calculator;
 
-        public UiManager(Calculator calculator)
+        public UiManager(Business.SimpleCalculator calculator)
         {
             _calculator = calculator;
         }
