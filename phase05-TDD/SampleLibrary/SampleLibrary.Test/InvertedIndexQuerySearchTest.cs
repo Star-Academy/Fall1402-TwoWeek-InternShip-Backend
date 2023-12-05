@@ -19,6 +19,31 @@ namespace SampleLibrary.Test
         }
 
         [Fact]
+        public void SearchQuery_ShouldReturnSearchResults_WhenInvertedIndexHasEntriesAndQueryIsValid()
+        {
+            // Assign
+            InvertedIndex invertedIndex = new();
+            invertedIndex.Add("NecessaryWord1", ["File1", "File2", "File3", "File4"]);
+            invertedIndex.Add("NecessaryWord2", ["File2", "File3", "File4"]);
+            invertedIndex.Add("OrWord1", ["File2"]);
+            invertedIndex.Add("OrWord2", ["File3"]);
+            invertedIndex.Add("OrWord3", ["File4"]);
+            invertedIndex.Add("OrWord4", ["File5"]);
+            invertedIndex.Add("ForbiddenWord1", ["File4"]);
+
+            QueryObj queryObj = new(["NecessaryWord1", "NecessaryWord2"], ["OrWord1", "OrWord2", "OrWord3", "OrWord4"], ["ForbiddenWord1"]);
+
+            var expected = new HashSet<string> { "File2", "File3" };
+
+            // Act
+            var actual = _sut.SearchQeury(invertedIndex, queryObj);
+
+            // Assert
+            actual.Should().BeEquivalentTo(expected);
+
+        }
+
+        [Fact]
         public void SearchQuery_ShouldReturnEmpty_WhenIvertedIndexIsEmpty()
         {
             // Assign
