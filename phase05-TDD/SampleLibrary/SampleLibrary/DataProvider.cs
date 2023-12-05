@@ -27,7 +27,7 @@ namespace SampleLibrary
 
             foreach (var file in sourceReader.GetAllSourceNames(source))
             {
-                result.Add(file, sourceReader.ReadSource(source, file));
+                result.Add(file, sourceReader.ReadSource(file));
                 
             }
 

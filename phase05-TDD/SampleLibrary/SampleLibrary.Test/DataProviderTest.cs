@@ -32,7 +32,7 @@ namespace SampleLibrary.Test
             };
 
             _sourceReader.GetAllSourceNames(sourceDirectory).Returns(["key1"]);
-            _sourceReader.ReadSource(sourceDirectory, "key1").Returns("value1");
+            _sourceReader.ReadSource("key1").Returns("value1");
 
 
             // Act
@@ -55,9 +55,9 @@ namespace SampleLibrary.Test
             };
 
             _sourceReader.GetAllSourceNames(sourceDirectory).Returns(expected.Keys);
-            _sourceReader.ReadSource(sourceDirectory, "key1").Returns("value1");
-            _sourceReader.ReadSource(sourceDirectory, "key2").Returns("value2");
-            _sourceReader.ReadSource(sourceDirectory, "key3").Returns("value3");
+            _sourceReader.ReadSource("key1").Returns("value1");
+            _sourceReader.ReadSource("key2").Returns("value2");
+            _sourceReader.ReadSource("key3").Returns("value3");
 
             // Act
             var actual = _sut.GetAllDataFromSource(sourceDirectory);

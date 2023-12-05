@@ -10,6 +10,6 @@ namespace SampleLibrary.Abstraction
     {
         IReadOnlyCollection<string> GetAllSourceNames(string sourcePath);
 
-        string ReadSource(string sourcePath, string sourceName);
+        string ReadSource(string sourcePath);
     }
 }

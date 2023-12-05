@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SampleLibrary.Abstraction
 {
-    public interface IWordFinder<T>
+    public interface IInvertedIndexQuerySearch
     {
-        public HashSet<string> Find(T source, List<string> words);
+        public HashSet<string> SearchQeury(InvertedIndex invertedIndex, QueryObj queryObj);
     }
 }
