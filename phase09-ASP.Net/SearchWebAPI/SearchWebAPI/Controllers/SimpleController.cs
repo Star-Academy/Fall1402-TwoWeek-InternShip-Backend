@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SampleLibrary;
 using SampleLibrary.Abstraction;
+using SearchWebAPI;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -11,19 +12,9 @@ public class SearchController : ControllerBase
 
     public SearchController()
     {
-        const string sourceDirectory = "C:\\Users\\mhda1\\Documents\\VSCode\\Fall1402-TwoWeek-InternShip-Backend\\EnglishData\\";
+        MyInvertedIndex _myInvertedIndex = new();
 
-        SourceReader sourceReader = new();
-        DataProvider dataProvider = new(sourceReader);
-
-        Dictionary<string, string> data = dataProvider.GetAllDataFromSource(sourceDirectory);
-
-        DataProcessor dataProcessor = new();
-        List<EntityStructure> processedData = dataProcessor.Process(data);
-
-        InvertedIndexConstructor invertedIndexConstructor = new();
-
-        _invertedIndex = invertedIndexConstructor.Build(processedData);
+        _invertedIndex = _myInvertedIndex.InvertedIndex;
     }
 
     [HttpGet]
