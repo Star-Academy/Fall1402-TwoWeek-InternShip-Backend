@@ -8,7 +8,7 @@ using SearchWebAPI;
 [ApiController]
 public class SearchController : ControllerBase
 {
-    private readonly InvertedIndex _invertedIndex; // Replace with the actual class for your inverted index
+    private readonly InvertedIndex _invertedIndex;
 
     public SearchController()
     {
